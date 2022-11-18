@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import skimage.exposure
 import pickle
+from PIL import Image
 
 # read mp4 file
 vidcap = cv2.VideoCapture('badapple.mp4')
@@ -19,6 +20,7 @@ while success:
         grayscale = cv2.cvtColor(result.astype(np.uint8), cv2.COLOR_BGR2GRAY)
         shrunk = cv2.resize(grayscale, (72, 56))
         ret, binary = cv2.threshold(shrunk, 127, 1, cv2.THRESH_BINARY)
+        # Image.fromarray(shrunk).save(f"binary/{count}.png")
         binary = [i.tolist() for i in binary]
         all_frames.append(binary)
         # print(binary)
